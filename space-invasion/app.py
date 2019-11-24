@@ -10,7 +10,7 @@ def run_game():
     screen = pygame.display.set_mode(
         (sett.width, sett.height))
     pygame.display.set_caption("Space Invasion")
-    ship = Ship(screen)
+    ship = Ship(screen, sett)
 
     while True:
         g_fun.check_events(ship)
