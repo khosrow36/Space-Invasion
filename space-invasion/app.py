@@ -13,7 +13,8 @@ def run_game():
     ship = Ship(screen)
 
     while True:
-        g_fun.check_events()
+        g_fun.check_events(ship)
+        ship.update_pos()
         g_fun.update_screen(sett, screen, ship)
 
 run_game()
