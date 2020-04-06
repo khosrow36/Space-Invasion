@@ -2,8 +2,8 @@ class Settings():
     """Game settings"""
     def __init__(self):
         #game settings
-        self.width = 1400
-        self.height = 1000
+        self.width = 800
+        self.height = 700
         self.background = (78, 120, 103)
 
         #ship settings

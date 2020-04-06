@@ -1,5 +1,6 @@
 import sys
 import pygame
+import pprint
 from bullet import Bullet
 
 def check_keydown_events(event, ship, settings, screen, bullets):
@@ -30,13 +31,14 @@ def fire_bullets(settings, screen, ship, bullets):
     new_bullet = Bullet(settings, screen, ship)
     bullets.add(new_bullet)
 
-def update_screen(settings, screen, ship, bullets):
+def update_screen(settings, screen, ship, alien, bullets):
     """Update the screen"""
     screen.fill(settings.background)
     for bullet in bullets.sprites():
         bullet.draw_bullet()
 
     ship.draw_ship()
+    alien.draw_alien()
     pygame.display.flip()
 
 def update_bullets(bullets):
