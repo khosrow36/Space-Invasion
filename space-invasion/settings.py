@@ -7,7 +7,8 @@ class Settings():
         self.background = (78, 120, 103)
 
         #ship settings
-        self.ship_speed = 2
+        self.ship_speed = 1.25
+        self.ship_limit = 3
 
         #bullet settings
         self.bullet_speed = 1

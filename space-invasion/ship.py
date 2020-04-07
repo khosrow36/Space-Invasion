@@ -25,3 +25,6 @@ class Ship():
     def draw_ship(self):
         """Draws the ship"""
         self.screen.blit(self.image, self.rect)
+
+    def center_ship(self):
+        self.center = self.screen_rect.centerx
