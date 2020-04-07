@@ -2,6 +2,7 @@ import sys
 import pygame
 import pprint
 from bullet import Bullet
+from alien import Alien
 
 def check_keydown_events(event, ship, settings, screen, bullets):
         if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
@@ -31,14 +32,42 @@ def fire_bullets(settings, screen, ship, bullets):
     new_bullet = Bullet(settings, screen, ship)
     bullets.add(new_bullet)
 
-def update_screen(settings, screen, ship, alien, bullets):
+def get_number_of_aliens_x(settings, alien_width):
+    available_space_x = settings.width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
+    return number_aliens_x
+
+def create_alien(settings, screen, aliens, alien_number, row_number):
+    alien = Alien(settings, screen)
+    alien_width = alien.rect.width
+    alien.x = alien_width + 2 * alien_width * alien_number
+    alien.rect.x = alien.x
+    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+    aliens.add(alien)
+
+def get_number_of_aliens_y(settings, ship_height, alien_height):
+    available_space_y = (settings.height - (3 * alien_height) - ship_height)
+    num_rows = int (available_space_y / (2 * alien_height))
+    return num_rows
+
+def create_fleet(settings, screen, ship, aliens):
+    """Create aliens fleet"""
+    alien = Alien(settings, screen)
+    number_aliens_x = get_number_of_aliens_x(settings, alien.rect.width)
+    number_aliens_y = get_number_of_aliens_y(settings, ship.rect.height, alien.rect.height)
+
+    for row_num in range(number_aliens_y):
+        for alien_number in range(number_aliens_x):
+            create_alien(settings, screen, aliens, alien_number, row_num)
+
+def update_screen(settings, screen, ship, aliens, bullets):
     """Update the screen"""
     screen.fill(settings.background)
     for bullet in bullets.sprites():
         bullet.draw_bullet()
 
     ship.draw_ship()
-    alien.draw_alien()
+    aliens.draw(screen)
     pygame.display.flip()
 
 def update_bullets(bullets):
