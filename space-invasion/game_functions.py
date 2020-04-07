@@ -76,3 +76,20 @@ def update_bullets(bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+
+
+def change_fleet_direction(settings, aliens):
+    for alien in aliens.sprites():
+        alien.rect.y += settings.fleet_drop_speed
+    settings.fleet_direction *= -1
+
+def check_fleet_edges(settings, aliens):
+    for alien in aliens.sprites():
+        if alien.check_edges():
+            change_fleet_direction(settings, aliens)
+            break
+
+def update_aliens(settings, aliens):
+    """Update the positions of aliens"""
+    check_fleet_edges(settings, aliens)
+    aliens.update()
